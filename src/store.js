@@ -45,7 +45,6 @@ export default new Vuex.Store({
 
   getters: {
     filterHerosByName: state => searchName => {
-      console.log(searchName);
       return state.heros.filter(hero => {
         const name = hero.localized_name.toLowerCase();
         const search = searchName.toLowerCase();

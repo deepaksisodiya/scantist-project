@@ -18,7 +18,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="hero in heros" v-bind:key="hero.id">
+        <tr v-for="hero in filterData" v-bind:key="hero.id">
           <td><img :src="`http://cdn.dota2.com/${hero.img}`" /></td>
           <td>{{ hero.localized_name }}</td>
           <td>{{ hero.pro_win }}</td>
@@ -31,7 +31,6 @@
 </template>
 
 <script>
-import debounce from "lodash.debounce";
 import { mapState } from "vuex";
 
 export default {
@@ -39,27 +38,19 @@ export default {
 
   data: function() {
     return {
-      searchName: null
+      searchName: ""
     };
   },
 
-  watch: {
-    searchName: function() {
-      this.search(this.searchName, this);
-    }
-  },
-
-  computed: mapState({
-    heros: state => state.heros,
-    isLoading: state => state.isLoading,
-    isError: state => state.isError
-  }),
-
-  methods: {
-    search: debounce((search, self) => {
-      const filterData = self.$store.getters.filterHerosByName(search);
-      console.log(filterData.length);
-    }, 500)
+  computed: {
+    filterData() {
+      return this.$store.getters.filterHerosByName(this.searchName);
+    },
+    ...mapState({
+      heros: state => state.heros,
+      isLoading: state => state.isLoading,
+      isError: state => state.isError
+    })
   },
 
   mounted() {
