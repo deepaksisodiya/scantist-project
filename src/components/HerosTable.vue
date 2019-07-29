@@ -1,32 +1,30 @@
 <template>
   <div>
-    <input v-model="searchName" />
+    <el-input placeholder="Search By Name" v-model="searchName"></el-input>
+
     <div v-if="isLoading">
       Loading...
     </div>
     <div v-else-if="isError">
       Error in fetching heros
     </div>
-    <table v-else>
-      <thead>
-        <tr>
-          <th>Hero Image</th>
-          <th>Hero Name</th>
-          <th>PRO Win Rate</th>
-          <th>Pro Pick Count</th>
-          <th>Pro Ban Count</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="hero in filterData" v-bind:key="hero.id">
-          <td><img :src="`http://cdn.dota2.com/${hero.img}`" /></td>
-          <td>{{ hero.localized_name }}</td>
-          <td>{{ hero.pro_win }}</td>
-          <td>{{ hero.pro_pick }}</td>
-          <td>{{ hero.pro_ban }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <el-table v-else :data="filterData">
+      <el-table-column label="Hero Image">
+        <div slot-scope="{ row }">
+          <el-image
+            style="width: 100px; height: 100px"
+            :src="`http://cdn.dota2.com/${row.img}`"
+          ></el-image>
+        </div>
+      </el-table-column>
+      <el-table-column prop="localized_name" label="Hero Name" width="180">
+      </el-table-column>
+      <el-table-column prop="pro_win" label="PRO Win Rate" width="180">
+      </el-table-column>
+      <el-table-column prop="pro_pick" label="Pro Pick Count">
+      </el-table-column>
+      <el-table-column prop="pro_ban" label="Pro Ban Count"> </el-table-column>
+    </el-table>
   </div>
 </template>
 
