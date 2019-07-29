@@ -18,7 +18,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="hero in heros.data" v-bind:key="hero.id">
+        <tr v-for="hero in heros.filterData" v-bind:key="hero.id">
           <td><img :src="`http://cdn.dota2.com/${hero.img}`" /></td>
           <td>{{ hero.localized_name }}</td>
           <td>{{ hero.pro_win }}</td>
@@ -42,8 +42,10 @@ export default {
       heros: {
         isLoading: false,
         isError: false,
-        data: []
+        data: [],
+        filterData: []
       },
+
       searchName: null
     };
   },
@@ -61,9 +63,12 @@ export default {
     }, 500),
 
     filterHeros() {
-      this.heros.data = this.heros.data.filter(hero => {
-        return hero.localized_name == this.searchName;
+      const filterData = this.heros.data.filter(hero => {
+        const localizedNameLowerCase = hero.localized_name.toLowerCase();
+        const searchNameLowerCase = this.searchName.toLowerCase();
+        return localizedNameLowerCase.includes(searchNameLowerCase);
       });
+      this.heros.filterData = filterData;
     }
   },
 
@@ -77,6 +82,7 @@ export default {
       );
       if (response.status === 200) {
         this.heros.data = response.data;
+        this.heros.filterData = response.data;
       }
     } catch (error) {
       this.heros.isError = true;
