@@ -4,11 +4,20 @@ exports[`Store.js set heros to some value 1`] = `
 Array [
   Object {
     "id": 1,
-    "name": "hero1",
+    "localized_name": "hero1",
   },
   Object {
     "id": 2,
-    "name": "hero2",
+    "localized_name": "hero2",
+  },
+]
+`;
+
+exports[`Store.js testing getters for filterHerosByName 1`] = `
+Array [
+  Object {
+    "id": 1,
+    "localized_name": "Deepak",
   },
 ]
 `;

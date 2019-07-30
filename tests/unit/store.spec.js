@@ -1,4 +1,4 @@
-import { mutations } from "../../src/store";
+import { mutations, getters } from "../../src/store";
 
 describe("Store.js", () => {
   test("set loading state to true", () => {
@@ -28,9 +28,23 @@ describe("Store.js", () => {
       heros: []
     };
     mutations.SET_HEROS(state, [
-      { id: 1, name: "hero1" },
-      { id: 2, name: "hero2" }
+      { id: 1, localized_name: "hero1" },
+      { id: 2, localized_name: "hero2" }
     ]);
     expect(state.heros).toMatchSnapshot();
+  });
+
+  test("testing getters for filterHerosByName", () => {
+    const state = {
+      heros: [
+        { id: 1, localized_name: "Deepak" },
+        { id: 2, localized_name: "Piyush" },
+        { id: 1, localized_name: "Mayur" },
+        { id: 1, localized_name: "Ankur" }
+      ]
+    };
+    const filterHeros = getters.filterHerosByName(state)("dee");
+    expect(filterHeros).toMatchSnapshot();
+    expect(filterHeros.length).toBe(1);
   });
 });
