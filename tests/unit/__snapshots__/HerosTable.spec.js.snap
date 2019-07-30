@@ -1,10 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`HerosTable Test for isError condition 1`] = `
+<div>
+  <el-input placeholder="Search By Name"></el-input>
+  <div>
+    Error in fetching heros
+  </div>
+</div>
+`;
+
 exports[`HerosTable Test for isLoading condition 1`] = `
 <div>
   <el-input placeholder="Search By Name"></el-input>
   <div>
     Loading...
   </div>
+</div>
+`;
+
+exports[`HerosTable Test for where we have heros data 1`] = `
+<div>
+  <el-input placeholder="Search By Name"></el-input>
+  <el-table>
+    <el-table-column label="Hero Image"></el-table-column>
+    <el-table-column prop="localized_name" label="Hero Name" width="180"></el-table-column>
+    <el-table-column prop="pro_win" label="PRO Win Rate" width="180"></el-table-column>
+    <el-table-column prop="pro_pick" label="Pro Pick Count"></el-table-column>
+    <el-table-column prop="pro_ban" label="Pro Ban Count"></el-table-column>
+  </el-table>
 </div>
 `;
