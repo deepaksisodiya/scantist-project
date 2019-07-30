@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HerosTable Test for isLoading condition 1`] = `
+<div>
+  <el-input placeholder="Search By Name"></el-input>
+  <div>
+    Loading...
+  </div>
+</div>
+`;
